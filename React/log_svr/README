@@ -1,0 +1,20 @@
+# Need to disable CORS policy in Google Chrome
+
+## Install this extention and enable: 
+https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc?hl=en-US
+
+## More info on CORS
+https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9
+
+This is a temporary hack until we send logs to a real server.
+
+
+# Install
+npm install
+
+# To run this server; run in a separate terminal from the Webapp
+node logServer.js
+
+Log file is stored `sensor_data.log`
+
+Can monitor logfile from this command: `tail -f ./sensor_data.log`
