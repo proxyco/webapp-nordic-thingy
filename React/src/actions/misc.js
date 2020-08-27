@@ -1,3 +1,6 @@
+import {} from "../components/Dashboard/Dashboard.js"
+const {postLog} = require('../http_post_log')
+
 export const RECEIVE_NEW_READING = "RECEIVE_NEW_READING";
 export const RECEIVE_NEW_NOTIFY_READING = "RECEIVE_NEW_NOTIFY_READING";
 export const FEATURE_NOTIFICATION_STATUS = "NOTIFY_FEATURE_STATUS";
@@ -103,6 +106,21 @@ export const toggleFeature = (feature, toggle="both", isMicrophone=false) => {
           };
         } else {
           e = (reading) => {
+            if (reading.detail !== undefined) {
+              const ts = new Date()
+              const data = {
+                type: reading.type,
+                name: state.misc.name.reading.name,
+                rx_iso_time: ts.toISOString(),
+                rx_timestamp: ts.getTime(),
+                fw_ev_timestamp: reading.timeStamp,
+                detail: reading.detail
+              }
+
+              postLog(JSON.stringify(data))
+              console.log(JSON.stringify(data))
+            }
+
             dispatch(receiveNewNotifyReading(feature, reading));
           };
         }
